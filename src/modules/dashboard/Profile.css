@@ -1,0 +1,54 @@
+.profile-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;         /* full viewport width - ignore parent width */
+  max-width: 100vw;     /* enforce no overflow beyond viewport */
+  height: 72px;         /* fixed height */
+  padding: 12px 30px;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  color: #222;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;   /* hide horizontal overflow */
+  overflow-y: visible;  /* allow vertical overflow if needed */
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.profile-details {
+  display: flex;
+  gap: 30px;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  min-width: 0;
+  overflow-wrap: break-word;
+  white-space: nowrap;    /* Prevent wrapping */
+  overflow: hidden;       /* Hide overflow */
+  text-overflow: ellipsis; /* Show "..." if overflow */
+  flex-shrink: 1;         /* Allow shrinking */
+  max-width: 60vw;        /* limit width to prevent overflow */
+}
+
+.profile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #555;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  margin-right: 15px;
+}
+
+/* Prevent button from causing overflow */
+.profile-header button {
+  flex-shrink: 0;
+  white-space: nowrap;
+}

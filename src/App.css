@@ -1,0 +1,49 @@
+/* 🔷 Blue-Based (Trust & Reliability) */
+.bg-blue-gradient-1 {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+}
+
+.bg-blue-gradient-2 {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+
+/* 🟩 Green-Based (Success & Growth) */
+.bg-green-gradient-1 {
+  background: linear-gradient(to right, #11998e, #38ef7d);
+}
+
+.bg-green-gradient-2 {
+  background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+}
+
+/* 💠 Professional & Neutral */
+.bg-neutral-gradient-1 {
+  background: linear-gradient(to right, #bdc3c7, #2c3e50);
+}
+
+.bg-neutral-gradient-2 {
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+/* 🌀 Dark Theme Option */
+.bg-dark-gradient {
+  background: linear-gradient(to right, #141e30, #243b55);
+}
+
+/* 🔧 Optional utility */
+.fullscreen {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-logo-overlay {
+  position: relative;
+  background: linear-gradient(to right, #1c1c1c, #2a2a2a, #3a3a3a);
+  background-image: url('/src/assets/KrushnaFinCORP.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+}

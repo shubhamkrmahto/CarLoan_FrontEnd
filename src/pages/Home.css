@@ -1,0 +1,70 @@
+/* Home.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevents scroll from ANY child */
+  width: 100%;
+}
+
+.home-wrapper {
+  width: 100%;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h4, h5 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+section {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.hero-section {
+  width: 100vw;
+  margin-top: 100px;
+  padding: 50px 15px;
+  box-sizing: border-box;
+}
+
+footer {
+  font-size: 0.9rem;
+}
+
+.pulse-button {
+  transition: transform 0.3s ease;
+}
+
+.pulse-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+}
+
+.text-dark {
+  color: #333;
+}
+
+.lead {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.mui-gradient-button {
+  background: linear-gradient(to right, #2193b0, #6dd5ed) !important;
+  color: white !important;
+  text-transform: capitalize !important;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(33, 147, 176, 0.5) !important;
+  transition: all 0.3s ease !important;
+}
+
+.mui-gradient-button:hover {
+  transform: scale(1.05) !important;
+}
