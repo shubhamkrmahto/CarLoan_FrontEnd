@@ -37,7 +37,7 @@ function ViewAllSanctionLetters() {
 
   const getSanctionLetters = () => {
     axios
-      .get('http://localhost:6053/CM/getAllSanction')
+      .get('http://localhost:9090/cm/CM/getAllSanction')
       .then((res) => {
         setSanction(res.data);
       })
@@ -50,7 +50,7 @@ function ViewAllSanctionLetters() {
   setLoadingSanctionId(id);
 
   axios
-    .get(`http://localhost:6053/CM/generateSanctionLetterPDF/${id}`)
+    .get(`http://localhost:9090/cm/CM/generateSanctionLetterPDF/${id}`)
     .then((res) => {
       setShowSuccess(true);
       setShouldRefresh(true);

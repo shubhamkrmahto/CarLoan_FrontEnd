@@ -24,7 +24,7 @@ function ViewAllSanctionLetters() {
 
   const getSanctionLetters = () => {
     axios
-      .get('http://localhost:6053/CM/getAllSanction')
+      .get('http://localhost:9090/cm/CM/getAllSanction')
       .then((res) => {
         setSanction(res.data);
       })

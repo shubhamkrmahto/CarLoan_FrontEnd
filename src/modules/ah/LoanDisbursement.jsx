@@ -51,7 +51,7 @@ function LoanDisbursement() {
     setLoadingSanctionId(id);
 
     axios
-      .post(`http://localhost:6054/AH/loandisbursement/${id}`)
+      .post(`http://localhost:9090/ah/AH/loandisbursement/${id}`)
       .then((res) => {
         setShowSuccess(true);
         setShouldRefresh(true);

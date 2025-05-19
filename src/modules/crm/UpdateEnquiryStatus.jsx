@@ -11,7 +11,7 @@ function UpdateEnquiryStatus() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const getAllEnquiry = () => {
-    axios.get('http://localhost:6051/enquiry/getAllEnquiry')
+    axios.get('http://localhost:9090/crm/enquiry/getAllEnquiry')
       .then((res) => {
         setEnquiry(res.data);
         console.log(res.data);
@@ -26,7 +26,7 @@ function UpdateEnquiryStatus() {
   }, []);
 
   const updateStatus = (id) => {
-    axios.get(`http://localhost:6051/enquiry/updateEnquiryStatus/${id}`)
+    axios.get(`http://localhost:9090/crm/enquiry/updateEnquiryStatus/${id}`)
       .then((res) => {
         setOpenSnackbar(true); // Show success snackbar
         setTimeout(() => {

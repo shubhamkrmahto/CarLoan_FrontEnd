@@ -10,7 +10,7 @@ function ViewEnquiry() {
   const [enquiry, setEnquiry] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:6051/enquiry/getApprovedEnquiry')
+    axios.get('http://localhost:9090/crm/enquiry/getApprovedEnquiry')
       .then(res => setEnquiry(res.data))
       .catch(err => alert("Error: " + err.message));
   }, []);
