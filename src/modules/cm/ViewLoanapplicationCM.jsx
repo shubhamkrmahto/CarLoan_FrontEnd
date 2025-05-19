@@ -28,7 +28,7 @@ function ViewLoanapplicationCM() {
 
   const getLoanApplicationID = () => {
     axios
-      .get('http://localhost:6051/loanApplication/getAllApplicationID')
+      .get('http://localhost:9090/crm/loanApplication/getAllApplicationID')
       .then((res) => {
         setApplicationID(res.data);
       })

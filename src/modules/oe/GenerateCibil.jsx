@@ -17,7 +17,7 @@ function GenerateCibil() {
 
   const getFTOEEnquiry = () => {
     setLoading(true);
-    axios.get('http://localhost:6051/enquiry/getEnquiryForward_To_Oe')
+    axios.get('http://localhost:9090/crm/enquiry/getEnquiryForward_To_Oe')
       .then((res) => {
         setEnquiry(res.data);
         setLoading(false);
@@ -30,7 +30,7 @@ function GenerateCibil() {
 
   const updateCIBIL = (id) => {
     setLoading(true);
-    axios.get(`http://localhost:6052/OE/updateCibil/${id}`)
+    axios.get(`http://localhost:9090/oe/OE/updateCibil/${id}`)
       .then(() => {
         setLoading(false);
         setShowPopup(true);

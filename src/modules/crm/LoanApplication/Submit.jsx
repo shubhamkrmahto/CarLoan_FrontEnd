@@ -31,7 +31,7 @@ function Submit({ files, formData, prevStep }) {
     });
 
     axios
-      .post(`http://localhost:6051/loanApplication/saveapplication/${enquiryID}`, loanApplication)
+      .post(`http://localhost:9090/crm/loanApplication/saveapplication/${enquiryID}`, loanApplication)
       .then(() => {
         setOpenSnackbar(true);
         setTimeout(() => navigate('/dashboard'), 3000);

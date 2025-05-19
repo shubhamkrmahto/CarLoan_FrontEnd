@@ -14,7 +14,7 @@ function Login() {
 
   function onLogin(data){
 
-    axios.get(`http://localhost:6050/employee/getEmployeeDetails/${data.username}/${data.password}`)
+    axios.get(`http://localhost:9090/ah/employee/getEmployeeDetails/${data.username}/${data.password}`)
     .then((response)=>{
       console.log(response.data);
       localStorage.setItem("user",JSON.stringify(response.data));

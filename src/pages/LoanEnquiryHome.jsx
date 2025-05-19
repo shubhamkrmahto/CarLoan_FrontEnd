@@ -26,7 +26,7 @@ function LoanEnquiryHome() {
     setOpenPopup(true);
 
     setTimeout(() => {
-      axios.post('http://localhost:6051/enquiry/saveEnquiry', customer)
+      axios.post('http://localhost:9090/crm/enquiry/saveEnquiry', customer)
         .then(() => {
           setOpenPopup(false);
           alert('Enquiry has been Registered...');

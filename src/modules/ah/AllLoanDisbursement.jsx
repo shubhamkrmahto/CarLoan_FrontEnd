@@ -34,7 +34,7 @@ function AllLoanDisbursement() {
 
   const getAllLoanDisbursement = () => {
     axios
-      .get('http://localhost:6054/AH/getAllLoanDisbursement')
+      .get('http://localhost:9090/ah/AH/getAllLoanDisbursement')
       .then((res) => {
         setLoandisbursement(res.data);
       })
@@ -46,7 +46,7 @@ function AllLoanDisbursement() {
   const createLoanDisbursement = (id) => {
     setLoanDisbursementId(id);
     axios
-      .post(`http://localhost:6054/AH/loandisbursement/${id}`)
+      .post(`http://localhost:9090/ah/AH/loandisbursement/${id}`)
       .then(() => {
         setShowSuccess(true);
         setShouldRefresh(true);

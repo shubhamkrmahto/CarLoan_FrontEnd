@@ -22,7 +22,7 @@ function ViewLoanapplicationOE() {
 
   function getLoanApplicationID() {
     setLoading(true);
-    axios.get('http://localhost:6051/loanApplication/getAllApplicationID')
+    axios.get('http://localhost:9090/crm/loanApplication/getAllApplicationID')
       .then((res) => {
         setApplicationID(res.data);
         setLoading(false);
