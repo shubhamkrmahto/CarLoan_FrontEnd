@@ -19,7 +19,7 @@ function ViewLedger() {
   }, [loanDisbursementID]);
 
   const fetchLedger = () => {
-    axios.get(`http://localhost:6054/AH/getLoanDisbursement/${loanDisbursementID}`)
+    axios.get(`http://localhost:9090/ah/ah/getLoanDisbursement/${loanDisbursementID}`)
       .then(response => {
         setLedgers(response.data.ledger || []);
       })
@@ -29,10 +29,10 @@ function ViewLedger() {
   };
 
   const handlePayEMI = (monthlyId) => {
-    axios.patch(`http://localhost:6054/AH/payEMI/${loanDisbursementID}/${monthlyId}`)
+    axios.patch(`http://localhost:9090/ah/ah/payEMI/${loanDisbursementID}/${monthlyId}`)
       .then(() => {
         setSnackbarOpen(true); // show success popup
-        return axios.get(`http://localhost:6054/AH/getLoanDisbursement/${loanDisbursementID}`);
+        return axios.get(`http://localhost:9090/ah/ah/getLoanDisbursement/${loanDisbursementID}`);
       })
       .then(response => {
         setLedgers(response.data.ledger || []);

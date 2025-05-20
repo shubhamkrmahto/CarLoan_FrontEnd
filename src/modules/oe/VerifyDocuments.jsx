@@ -35,7 +35,7 @@ function VerifyDocuments() {
 
   function getLoanApplication() {
     axios
-      .get(`http://localhost:6051/loanApplication/getLoanApplicationDetailById/${loanApplicationID}`)
+      .get(`http://localhost:9090/crm/loanApplication/getLoanApplicationDetailById/${loanApplicationID}`)
       .then((res) => {
         setApplication(res.data);
         setLoading(false);
@@ -48,7 +48,7 @@ function VerifyDocuments() {
 
   function approveApplication() {
   axios
-    .get(`http://localhost:6052/OE/updateLoanApplicationDocumentsToVerified/${loanApplicationID}`)
+    .get(`http://localhost:9090/oe/OE/updateLoanApplicationDocumentsToVerified/${loanApplicationID}`)
     .then((res) => {
       if (typeof res.data !== 'string') {
         setApplication(res.data);
@@ -62,7 +62,7 @@ function VerifyDocuments() {
 
 function disapproveApplication() {
   axios
-    .get(`http://localhost:6052/OE/updateLoanApplicationDocumentsToRejected/${loanApplicationID}`)
+    .get(`http://localhost:9090/oe/OE/updateLoanApplicationDocumentsToRejected/${loanApplicationID}`)
     .then((res) => {
       if (typeof res.data !== 'string') {
         setApplication(res.data);

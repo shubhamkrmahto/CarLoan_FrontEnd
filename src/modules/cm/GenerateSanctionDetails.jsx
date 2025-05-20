@@ -29,7 +29,7 @@ function GenerateSanctionDetails() {
 
   const getSanctionLetter = () => {
     axios
-      .get(`http://localhost:6053/CM/getSanction/${sanctionID}`)
+      .get(`http://localhost:9090/cm/cm/getSanction/${sanctionID}`)
       .then((res) => {
         setSanction(res.data);
       })
@@ -40,7 +40,7 @@ function GenerateSanctionDetails() {
 
 const updateRateOfInterest = () => {
   axios
-    .get(`http://localhost:6053/CM/updateRateInterest/${sanctionID}`)
+    .get(`http://localhost:9090/cm/cm/updateRateInterest/${sanctionID}`)
     .then((res) => {
       setSnackbar({ open: true, message: 'Rate Of Interest generated', redirect: false });
       setShouldRefresh(true); // mark for refresh after snackbar
@@ -52,7 +52,7 @@ const updateRateOfInterest = () => {
 
 const updateSanctionedLoanAmount = () => {
   axios
-    .get(`http://localhost:6053/CM/updateSanctionedLoanAmount/${sanctionID}`)
+    .get(`http://localhost:9090/cm/cm/updateSanctionedLoanAmount/${sanctionID}`)
     .then((res) => {
       setSnackbar({ open: true, message: 'Sanction Amount generated', redirect: false });
       setShouldRefresh(true);
@@ -64,7 +64,7 @@ const updateSanctionedLoanAmount = () => {
 
 const updateMonthlyEMIAmount = () => {
   axios
-    .get(`http://localhost:6053/CM/updateEMIAmount/${sanctionID}`)
+    .get(`http://localhost:9090/cm/cm/updateEMIAmount/${sanctionID}`)
     .then((res) => {
       setSnackbar({ open: true, message: 'EMI Amount generated', redirect: false });
       setShouldRefresh(true);

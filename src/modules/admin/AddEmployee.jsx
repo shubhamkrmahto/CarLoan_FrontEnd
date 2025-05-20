@@ -39,7 +39,7 @@ function AddEmployee() {
     formData.append("photo", data.profilePhoto[0]);
 
     axios
-      .post("http://localhost:6050/employee/saveEmployee", formData)
+      .post("http://localhost:9090/admin/employee/saveEmployee", formData)
       .then(() => {
         setOpenSnackbar(true);
         setTimeout(() => {

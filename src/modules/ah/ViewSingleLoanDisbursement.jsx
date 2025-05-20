@@ -11,7 +11,7 @@ function ViewSingleLoanDisbursement() {
   const [loanDisbursement, setLoanDisbursement] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:6054/AH/getLoanDisbursement/${loanDisbursementID}`)
+    axios.get(`http://localhost:9090/ah/ah/getLoanDisbursement/${loanDisbursementID}`)
       .then(res => setLoanDisbursement(res.data))
       .catch(err => alert('Error fetching loan details: ' + err.message));
   }, [loanDisbursementID]);

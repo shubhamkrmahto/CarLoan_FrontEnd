@@ -31,7 +31,7 @@ function DownPaymentDetails() {
   const onSubmit = (data) => {
     setOpenPopup(true);
     axios
-      .patch(`http://localhost:6054/AH/payDownPayment/${loanDisbursementID}`, data)
+      .patch(`http://localhost:9090/ah/ah/payDownPayment/${loanDisbursementID}`, data)
       .then(() => {
         setTimeout(() => {
           setOpenPopup(false);

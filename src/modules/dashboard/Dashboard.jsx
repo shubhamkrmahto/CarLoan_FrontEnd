@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Box, Grid, Container } from '@mui/material';
+
 import Profile from './Profile';
 import SideNav from './SideNav';
 import AddEmployee from '../admin/AddEmployee';
@@ -17,7 +19,6 @@ import ViewLoanapplicationCM from '../cm/ViewLoanapplicationCM';
 import SanctionLetterDetails from '../cm/SanctionLetterDetails';
 import ViewAllSanctionLetters from '../cm/ViewAllSanctionLetters';
 import UpdateSanctionLetter from '../cm/UpdateSanctionLetter';
-import './Dashboard.css'; // Include your styles
 import ViewSanctionLetterID from '../cm/ViewSanctionLetterID';
 import GenerateSanctionDetails from '../cm/GenerateSanctionDetails';
 import AllLoanDisbursement from '../ah/AllLoanDisbursement';
@@ -27,7 +28,6 @@ import ViewSingleLoanDisbursement from '../ah/ViewSingleLoanDisbursement';
 import ViewLedger from '../ah/ViewLedger';
 
 function Dashboard() {
-
   const userJson = localStorage.getItem("user");
   const { employeeType } = JSON.parse(userJson);
 
@@ -58,34 +58,52 @@ function Dashboard() {
       { path: 'viewcustomer', Component: <ViewCustomer /> }
     ]
   };
-  
-  return (
-    <div className="dashboard-wrapper">
-      <aside className="sidenav">
-        <SideNav />
-      </aside>
 
-      <div className="main-area">
+  return (
+    <Box sx={{ display: 'flex', minHeight: '80vh', width: '100%', overflowX: 'hidden' }}>
+      {/* Sidebar */}
+      <Box sx={{
+    width: { xs: '100%', sm: '220px' },
+    pr: { sm: 3 },
+    flexShrink: 0,
+     }}>
+        <SideNav />
+      </Box>
+
+      {/* Main content */}
+      <Box sx={{ flexGrow: 1, minWidth: 0 }}>
         <Profile />
-        <div className="page-content">
+
+        <Box
+          sx={{
+          mt: 3,
+          p: 2,
+          borderRadius: 2,
+          background: 'linear-gradient(to right, #e3f2fd, #90a4ae)',
+          minHeight: '500px',
+          overflowX: 'auto', // allows inner scroll on table overflow
+          }}
+        >
           <Routes>
-        {appRoute[employeeType].map((btn, index) => (
-          <Route key={index} path={btn.path} element={btn.Component} />
-        ))}
-        <Route path="/loanenquiry" element={<LoanEnquiry/>} />
-        <Route path='/loanapplication/:enquiryID' element={<LoanApplication />} />
-        <Route path='/verifydocuments/:loanApplicationID' element={<VerifyDocuments />} />
-        <Route path='/fillsanctiondetails/:loanApplicationID' element={<SanctionLetterDetails />} />
-        <Route path='/updatesanctionletter/:sanctionID' element={<UpdateSanctionLetter />} />
-        <Route path='/generatesanctiondetails/:sanctionID' element={<GenerateSanctionDetails />} />
-        <Route path='/addbankdetails/:loanDisbursementID' element={<AddBankDetails />} />
-        <Route path='/adddownpaymentdetails/:loanDisbursementID' element={<DownPaymentDetails />} />
-        <Route path='/viewsingleloandisbursement/:loanDisbursementID' element={<ViewSingleLoanDisbursement />} />
-        <Route path='/viewledger/:loanDisbursementID' element={<ViewLedger />} />
-      </Routes>
-        </div>
-      </div>
-    </div>
+            {appRoute[employeeType]?.map((btn, index) => (
+              <Route key={index} path={btn.path} element={btn.Component} />
+            ))}
+            {/* Common routes */}
+            <Route path="/loanenquiry" element={<LoanEnquiry />} />
+              <Route path='/loanapplication/:enquiryID' element={<LoanApplication />} />
+              <Route path='/verifydocuments/:loanApplicationID' element={<VerifyDocuments />} />
+              <Route path='/fillsanctiondetails/:loanApplicationID' element={<SanctionLetterDetails />} />
+              <Route path='/updatesanctionletter/:sanctionID' element={<UpdateSanctionLetter />} />
+              <Route path='/generatesanctiondetails/:sanctionID' element={<GenerateSanctionDetails />} />
+              <Route path='/addbankdetails/:loanDisbursementID' element={<AddBankDetails />} />
+              <Route path='/adddownpaymentdetails/:loanDisbursementID' element={<DownPaymentDetails />} />
+              <Route path='/viewsingleloandisbursement/:loanDisbursementID' element={<ViewSingleLoanDisbursement />} />
+              <Route path='/viewledger/:loanDisbursementID' element={<ViewLedger />} />
+
+          </Routes>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
