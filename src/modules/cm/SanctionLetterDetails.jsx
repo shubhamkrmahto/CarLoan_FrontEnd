@@ -40,7 +40,7 @@ function SanctionLetterDetails() {
 
     axios
       .post(
-        `http://localhost:9090/cm/CM/saveSanction/${loanApplicationID}`,
+        `http://localhost:9090/cm/cm/saveSanction/${loanApplicationID}`,
         sanctionLetter
       )
       .then((res) => {

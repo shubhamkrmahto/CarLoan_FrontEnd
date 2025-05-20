@@ -21,9 +21,9 @@ function ViewEnquiry() {
       Approved Enquiries
       </Typography>
 
-      <div style={{ overflowX: 'auto' }}>
-        <TableContainer component={Paper} elevation={4}>
-          <Table size="small" sx={{ minWidth: 1000 }}>
+      <div style={{ maxWidth: '100%', overflowX: 'auto' }}>
+      <TableContainer component={Paper} elevation={4}>
+        <Table size="small" sx={{ minWidth: 1000 }}>
             <TableHead sx={{ backgroundColor: '#1976d2' }}>
               <TableRow>
                 {/* headers */}

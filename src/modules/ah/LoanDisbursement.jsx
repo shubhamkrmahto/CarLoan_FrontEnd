@@ -37,7 +37,7 @@ function LoanDisbursement() {
   const getSanctionLetters = () => {
     setLoading(true);
     axios
-      .get('http://localhost:6053/CM/getAllSanction')
+      .get('http://localhost:9090/cm/cm/getAllSanction')
       .then((res) => {
         setSanction(res.data);
       })
@@ -51,7 +51,7 @@ function LoanDisbursement() {
     setLoadingSanctionId(id);
 
     axios
-      .post(`http://localhost:9090/ah/AH/loandisbursement/${id}`)
+      .post(`http://localhost:9090/ah/ah/loandisbursement/${id}`)
       .then((res) => {
         setShowSuccess(true);
         setShouldRefresh(true);
