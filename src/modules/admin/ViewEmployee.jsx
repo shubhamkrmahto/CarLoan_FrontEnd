@@ -24,7 +24,7 @@ function ViewEmployee() {
   }, []);
 
   function fetchEmployees() {
-    axios.get('http://localhost:9090/admin/employee/getAllEmployee')
+    axios.get('http://localhost:9090/admin/admin/getAllEmployee')
       .then((res) => {
         setEmployee(res.data);
       })
@@ -51,7 +51,7 @@ function ViewEmployee() {
 
   // Confirm deletion
     const handleConfirmDelete = () => {
-    axios.delete(`http://localhost:9090/admin/employee/delete/${deleteId}`)
+    axios.delete(`http://localhost:9090/admin/admin/employee/delete/${deleteId}`)
       .then(() => {
         setOpenConfirmDialog(false);
         setDeleteId(null);

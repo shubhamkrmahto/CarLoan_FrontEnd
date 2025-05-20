@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './SideNav.css'; // External CSS for styling
+import { Button, Stack, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SideNav() {
+  const navigate = useNavigate();
   const userJson = localStorage.getItem("user");
   const { employeeType } = JSON.parse(userJson);
 
@@ -24,7 +25,6 @@ function SideNav() {
       { label: "Update Sanction Details", to: '/dashboard/viewloanapplicationid' },
       { label: "Generate Sanction Details", to: '/dashboard/viewsanctionletterid' },
       { label: "Generate Sanction Letters", to: '/dashboard/viewallsanctionletters' }
-      
     ],
     AH: [
       { label: "Create Loan Disbursement", to: '/dashboard/loandisbursement' },
@@ -36,17 +36,21 @@ function SideNav() {
   };
 
   return (
-  <div className="sidenav-container">
-    {dynamicRouting[employeeType]?.map((btn, index) => (
-      <button key={index} className="sidenav-button">
-        <Link to={btn.to} className="sidenav-link">
+    <Stack spacing={2}>
+      <Typography variant="h6">Dashboard</Typography>
+      {dynamicRouting[employeeType]?.map((btn, index) => (
+        <Button
+          key={index}
+          variant="outlined"
+          fullWidth
+        >
+          <Link to={btn.to} className="sidenav-link">
           {btn.label}
         </Link>
-      </button>
-    ))}
-  </div>
-);
-
+        </Button>
+      ))}
+    </Stack>
+  );
 }
 
 export default SideNav;

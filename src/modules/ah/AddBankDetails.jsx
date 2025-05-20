@@ -29,7 +29,7 @@ function AddBankDetails() {
   const addBankDetails = async (data) => {
     try {
       await axios.patch(
-        `http://localhost:9090/ah/AH/addBankAccountDetails/${loanDisbursementID}`,
+        `http://localhost:9090/ah/ah/addBankAccountDetails/${loanDisbursementID}`,
         data
       );
       setOpenPopup(true);

@@ -25,25 +25,28 @@ function Profile() {
 
   return (
     <>
-      <header className="profile-header">
-        <img
-          className="profile-image"
-          src={user.profilePhoto ? `data:image/jpeg;base64,${user.profilePhoto}` : '/default-profile.png'}
-          alt="Profile"
-        />
-        <div className="profile-details">
-          <span><strong>Welcome,</strong> {user.employeeName}</span>
-          <span><strong>Role: </strong>{user.employeeType}</span>
-        </div>
-        <Button 
-          variant="contained" 
-          color="error" 
-          onClick={handleLogout}
-          sx={{ height: '36px' }}
-        >
-          Logout
-        </Button>
-      </header>
+              <header className="profile-header">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <img
+              className="profile-image"
+              src={user.profilePhoto ? `data:image/jpeg;base64,${user.profilePhoto}` : '/default-profile.png'}
+              alt="Profile"
+            />
+            <div className="profile-details">
+              <span><strong>Welcome,</strong> {user.employeeName}</span>
+              <span><strong>Role: </strong>{user.employeeType}</span>
+            </div>
+          </div>
+
+          <Button 
+            variant="contained" 
+            color="error" 
+            onClick={handleLogout}
+            sx={{ height: '36px' }}
+          >
+            Logout
+          </Button>
+        </header>
 
       <Snackbar
         open={snackbarOpen}
