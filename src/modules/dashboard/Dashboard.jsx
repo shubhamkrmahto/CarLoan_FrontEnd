@@ -11,7 +11,7 @@ import LoanEnquiry from '../crm/LoanEnquiry';
 import GenerateCibil from '../oe/GenerateCibil';
 import VerifyDocuments from '../oe/VerifyDocuments';
 import LoanDisbursement from '../ah/LoanDisbursement';
-import ViewCustomer from '../customer/ViewCustomer';
+import ViewAllCustomer from '../crm/ViewAllCustomer';
 import ViewEnquiry from '../crm/ViewEnquiry';
 import UpdateEnquiryStatus from '../crm/UpdateEnquiryStatus';
 import ViewLoanapplicationOE from '../oe/ViewLoanapplicationOE';
@@ -26,6 +26,7 @@ import AddBankDetails from '../ah/AddBankDetails';
 import DownPaymentDetails from '../ah/DownPaymentDetails';
 import ViewSingleLoanDisbursement from '../ah/ViewSingleLoanDisbursement';
 import ViewLedger from '../ah/ViewLedger';
+import ViewAllEnquiry from '../crm/ViewAllEnquiry';
 
 function Dashboard() {
   const userJson = localStorage.getItem("user");
@@ -37,8 +38,9 @@ function Dashboard() {
       { path: 'viewemployee', Component: <ViewEmployee /> }
     ],
     CRM: [
-      { path: 'loanenquiry', Component: <LoanEnquiry /> },
-      { path: 'viewenquiry', Component: <ViewEnquiry /> },
+      { path: 'viewallCustomer', Component: <ViewAllCustomer /> },
+      { path: 'viewallenquiry', Component:<ViewAllEnquiry/>},
+      { path: 'approvedenquiries', Component: <ViewEnquiry /> },
       { path: 'updateenquirystatus', Component: <UpdateEnquiryStatus /> }
     ],
     OE: [
@@ -53,17 +55,15 @@ function Dashboard() {
     AH: [
       { path: 'loandisbursement', Component: <LoanDisbursement /> },
       { path: 'allloandisbursements', Component: <AllLoanDisbursement /> }
-    ],
-    CUSTOMER: [
-      { path: 'viewcustomer', Component: <ViewCustomer /> }
     ]
   };
+
 
   return (
     <Box sx={{ display: 'flex', minHeight: '80vh', width: '100%', overflowX: 'hidden' }}>
       {/* Sidebar */}
       <Box sx={{
-    width: { xs: '100%', sm: '220px' },
+    width: { xs: '100%', sm: '180px' },
     pr: { sm: 3 },
     flexShrink: 0,
      }}>
@@ -89,7 +89,7 @@ function Dashboard() {
               <Route key={index} path={btn.path} element={btn.Component} />
             ))}
             {/* Common routes */}
-            <Route path="/loanenquiry" element={<LoanEnquiry />} />
+              <Route path="/loanenquiry/:enquiryID" element={<LoanEnquiry />} />
               <Route path='/loanapplication/:enquiryID' element={<LoanApplication />} />
               <Route path='/verifydocuments/:loanApplicationID' element={<VerifyDocuments />} />
               <Route path='/fillsanctiondetails/:loanApplicationID' element={<SanctionLetterDetails />} />

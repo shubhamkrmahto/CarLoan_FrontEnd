@@ -2,13 +2,12 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {
   Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper, Button, Snackbar, Alert, Typography
+  TableHead, TableRow, Paper, Typography
 } from '@mui/material';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function UpdateEnquiryStatus() {
+function ViewAllEnquiry() {
   const [enquiry, setEnquiry] = useState([]);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const getAllEnquiry = () => {
     axios.get('http://localhost:9090/crm/enquiry/getAllEnquiry')
@@ -25,20 +24,6 @@ function UpdateEnquiryStatus() {
     getAllEnquiry();
   }, []);
 
-  const updateStatus = (id) => {
-    axios.patch(`http://localhost:9090/crm/enquiry/updateEnquiryStatus/${id}`)
-      .then((res) => {
-        setOpenSnackbar(true); // Show success snackbar
-        setTimeout(() => {
-          setOpenSnackbar(false);
-        }, 3000);
-        getAllEnquiry(); // Refresh data
-      })
-      .catch(err => {
-        alert(err?.response?.data?.message || "Failed to update status.");
-      });
-  };
-
   return (
     <div className="container my-4">
       <Typography variant="h5" gutterBottom>
@@ -51,8 +36,8 @@ function UpdateEnquiryStatus() {
             <TableRow>
               {[
                 "Enquiry ID", "Name", "DOB", "Gender", "Email", "Contact",
-                "Alt Contact", "Aadhar", "PAN", "Status", "Date",
-                "CIBIL ID", "CIBIL Score", "CIBIL Status", "Update"
+                "Alternate Contact", "Aadhar No", "PAN Card No", "Status", "Enquiry Date",
+                "CIBIL Score", "CIBIL Status"
               ].map((head, i) => (
                 <TableCell key={i} sx={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>
                   {head}
@@ -74,34 +59,15 @@ function UpdateEnquiryStatus() {
                 <TableCell>{e.panCardNo}</TableCell>
                 <TableCell>{e.enquiryStatus}</TableCell>
                 <TableCell>{e.enquiryDateTime}</TableCell>
-                <TableCell>{e.cibil?.cibilId || "N/A"}</TableCell>
                 <TableCell>{e.cibil?.cibilScore || "N/A"}</TableCell>
                 <TableCell>{e.cibil?.cibilStatus || "N/A"}</TableCell>
-                <TableCell>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    color="success"
-                    onClick={() => updateStatus(e.enquiryId)}
-                    disabled={e.enquiryStatus !== 'PENDING'}
-                  >
-                    Forward To OE
-                  </Button>
-                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-
-      {/* Snackbar Popup */}
-      <Snackbar open={openSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
-        <Alert severity="success" variant="filled" sx={{ width: '100%' }}>
-        Enquiry status updated successfully!
-        </Alert>
-      </Snackbar>
     </div>
   );
 }
 
-export default UpdateEnquiryStatus;
+export default ViewAllEnquiry

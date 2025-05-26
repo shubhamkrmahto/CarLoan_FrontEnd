@@ -1,82 +1,122 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import {
-  Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper, Button, Typography,
-  Skeleton, Fade
-} from '@mui/material';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  Typography,
+  Paper,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+  TableContainer,
+  Skeleton
+} from '@mui/material';
 
 function ViewLoanapplicationOE() {
-  const [applicationID, setApplicationID] = useState([]);
+  const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getLoanApplicationID();
+    getLoanApplications();
   }, []);
 
-  function verifyDocuments(loanApplicationID) {
+  const verifyDocuments = (loanApplicationID) => {
     navigate(`/dashboard/verifydocuments/${loanApplicationID}`);
-  }
+  };
 
-  function getLoanApplicationID() {
+  const getLoanApplications = () => {
     setLoading(true);
-    axios.get('http://localhost:9090/crm/loanApplication/getAllApplicationID')
+    axios
+      .get('http://localhost:9090/crm/loanApplication/getAllApplications')
       .then((res) => {
-        setApplicationID(res.data);
+        setApplications(res.data);
         setLoading(false);
       })
-      .catch(err => {
-        alert("Error: " + err.message);
+      .catch((err) => {
+        alert(err.response?.data?.message || "Error fetching loan applications.");
         setLoading(false);
       });
-  }
+  };
 
   return (
-    <div>
-      <Typography variant="h4" gutterBottom mt={2}>
+    <Box p={4}>
+      <Typography variant="h4" gutterBottom color="primary">
         Loan Applications
       </Typography>
 
-      <TableContainer component={Paper} elevation={4} sx={{ maxWidth: 600, mt: 2 }}>
-        <Table size="small" aria-label="loan applications table">
-          <TableHead sx={{ backgroundColor: '#1976d2' }}>
-            <TableRow>
-              <TableCell sx={{ color: 'white' }}>Loan Application ID</TableCell>
-              <TableCell sx={{ color: 'white' }}>Action</TableCell>
-            </TableRow>
-          </TableHead>
-
-          <TableBody>
-            {loading ? (
-              Array.from({ length: 5 }).map((_, i) => (
-                <TableRow key={i}>
-                  <TableCell><Skeleton variant="text" width={180} /></TableCell>
-                  <TableCell><Skeleton variant="rectangular" width={80} height={30} /></TableCell>
-                </TableRow>
-              ))
-            ) : (
-              applicationID.map((id, index) => (
-                <TableRow key={index} hover>
-                  <TableCell>{typeof id === 'object' ? id.applicationId || id.ApplicationId || JSON.stringify(id) : id}</TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      onClick={() => verifyDocuments(typeof id === 'object' ? id.applicationId || id.ApplicationId || id : id)}
-                    >
-                      View
-                    </Button>
+      <Paper elevation={3}>
+        <TableContainer>
+          <Table size="small">
+            <TableHead>
+              <TableRow sx={{ backgroundColor: '#1976d2' }}>
+                <TableCell sx={{ color: 'white' }}><strong>Loan App ID</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Name</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Username</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>DOB</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Gender</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Contact</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Email</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Address</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Aadhar</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>PAN</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Loan Application Status</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Action</strong></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {loading
+                ? Array.from({ length: 5 }).map((_, index) => (
+                    <TableRow key={index}>
+                      {Array.from({ length: 11 }).map((_, cellIndex) => (
+                        <TableCell key={cellIndex}>
+                          <Skeleton variant="text" width={100} />
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                : applications.map((app, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{app.applicationId}</TableCell>
+                      <TableCell>{app.customer?.customerName}</TableCell>
+                      <TableCell>{app.customer?.userName}</TableCell>
+                      <TableCell>{app.customer?.dateOfBirth}</TableCell>
+                      <TableCell>{app.customer?.gender}</TableCell>
+                      <TableCell>{app.customer?.customerContactNumber}</TableCell>
+                      <TableCell>{app.customer?.customerEmailId}</TableCell>
+                      <TableCell>{app.customer?.customerPermanentAddress}</TableCell>
+                      <TableCell>{app.customer?.aadharNo}</TableCell>
+                      <TableCell>{app.customer?.panCardNo}</TableCell>
+                      <TableCell>{app.loanApplicationStatus}</TableCell>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          size="small"
+                          onClick={() => verifyDocuments(app.applicationId)}
+                          disabled={app.loanApplicationStatus ==='DOCUMENTS_VERIFIED' || app.loanApplicationStatus ==='DOCUMENTS_REJECTED'}
+                        >
+                          Verify
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))
+              }
+              {!loading && applications.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={11} align="center">
+                    No loan applications found.
                   </TableCell>
                 </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Box>
   );
 }
 

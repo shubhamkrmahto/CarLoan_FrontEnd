@@ -34,6 +34,7 @@ function LoanApplication() {
 
   const [formData, setFormData] = useState({
     customer: {
+      customerId:'',
       age: '',
       state: '',
       customerPermanentAddress: '',
@@ -111,10 +112,8 @@ function LoanApplication() {
         status:'',
         remarks:''
     },
-    cibil:{},
     currentLoanDetails:{},
     loanDisbursement:{},
-    ledger:{},
     sanctionLetter:{},
 
     // ... Add empty objects for cibil, currentLoanDetails, etc.
