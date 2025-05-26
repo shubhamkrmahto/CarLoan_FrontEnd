@@ -20,6 +20,7 @@ function SanctionLetterDetails() {
     console.log(data);
 
     const sanctionLetter = {
+      customerId:'',
       sanctionDate: '',
       applicantName: '',
       contactDetails: '',
@@ -34,7 +35,7 @@ function SanctionLetterDetails() {
       modeOfPayment: data.modeOfPayment,
       remarks: data.remarks,
       termsAndCondition: data.termsAndCondition,
-      status: data.status,
+      status:'NOT_GENERATED',
       sanctionletter: '',
     };
 
@@ -82,11 +83,6 @@ function SanctionLetterDetails() {
               fullWidth
               multiline
               {...register('termsAndCondition')}
-            />
-            <TextField
-              label="Status"
-              fullWidth
-              {...register('status')}
             />
             <TextField
               label="Remarks"

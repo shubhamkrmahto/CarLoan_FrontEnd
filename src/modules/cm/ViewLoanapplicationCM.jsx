@@ -15,7 +15,7 @@ import {
 } from '@mui/material';
 
 function ViewLoanapplicationCM() {
-  const [applicationID, setApplicationID] = useState([]);
+  const [applications, setApplications] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +28,12 @@ function ViewLoanapplicationCM() {
 
   const getLoanApplicationID = () => {
     axios
-      .get('http://localhost:9090/crm/loanApplication/getAllApplicationID')
+      .get('http://localhost:9090/crm/loanApplication/getAllApplications')
       .then((res) => {
-        setApplicationID(res.data);
+        setApplications(res.data);
       })
       .catch((err) => {
-        alert(err.response?.data?.message || "Error fetching loan application IDs.");
+        alert(err.response?.data?.message || "Error fetching loan applications.");
       });
   };
 
@@ -45,27 +45,49 @@ function ViewLoanapplicationCM() {
 
       <Paper elevation={3}>
         <TableContainer>
-          <Table>
+          <Table size="small">
             <TableHead>
               <TableRow sx={{ backgroundColor: '#1976d2' }}>
-                <TableCell><strong>Loan Application ID</strong></TableCell>
-                <TableCell><strong>Update Sanction Details</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Loan App ID</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Name</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Username</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>DOB</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Gender</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Contact</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Email</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Address</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Aadhar</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>PAN</strong></TableCell>
+                <TableCell sx={{ color: 'white' }}><strong>Sanction Details</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {applicationID.map((id, index) => (
+              {applications.map((app, index) => (
                 <TableRow key={index}>
-                  <TableCell>{id}</TableCell>
+                  <TableCell>{app.applicationId}</TableCell>
+                  <TableCell>{app.customer?.customerName}</TableCell>
+                  <TableCell>{app.customer?.userName}</TableCell>
+                  <TableCell>{app.customer?.dateOfBirth}</TableCell>
+                  <TableCell>{app.customer?.gender}</TableCell>
+                  <TableCell>{app.customer?.customerContactNumber}</TableCell>
+                  <TableCell>{app.customer?.customerEmailId}</TableCell>
+                  <TableCell>{app.customer?.customerPermanentAddress}</TableCell>
+                  <TableCell>{app.customer?.aadharNo}</TableCell>
+                  <TableCell>{app.customer?.panCardNo}</TableCell>
                   <TableCell>
-                    <Button variant="contained" color="primary" onClick={() => fillSanctionDetails(id)}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => fillSanctionDetails(app.applicationId)}
+                    >
                       Update
                     </Button>
                   </TableCell>
                 </TableRow>
               ))}
-              {applicationID.length === 0 && (
+              {applications.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={3} align="center">
+                  <TableCell colSpan={11} align="center">
                     No loan applications found.
                   </TableCell>
                 </TableRow>

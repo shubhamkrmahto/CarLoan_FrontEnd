@@ -43,37 +43,63 @@ function LoginModal({ isOpen, onClose }) {
   };
 
   const onSubmit = (data) => {
-    setLoading(true);
-    const url =
-      authMode === 'login'
-        ? `http://localhost:9090/admin/admin/getEmployeeDetails/${data.username}/${data.password}`
-        : `http://localhost:9090/admin/admin/registerEmployee`;
+  setLoading(true);
 
-    const method = authMode === 'login' ? axios.get : axios.post;
-
-    method(url, authMode === 'register' ? data : undefined)
+  if (authMode === 'login') {
+    const url = `http://localhost:9090/admin/admin/getEmployeeDetails/${data.userName}/${data.password}`;
+    axios.get(url)
       .then((response) => {
-        if (authMode === 'login') {
-          localStorage.setItem('user', JSON.stringify(response.data));
-          setShowPopup(true);
-          reset();
-          setTimeout(() => {
-            setShowPopup(false);
-            onClose();
+        const userData = response.data;
+        localStorage.setItem('user', JSON.stringify(userData));
+        setShowPopup(true);
+        setTimeout(() => {
+          setShowPopup(false);
+          onClose();
+          const role = userData.employeeType?.toUpperCase(); // Defensive check
+          if (['ADMIN', 'AH', 'OE', 'CRM', 'CM'].includes(role)) {
             navigate('/dashboard');
-            reset(); // Clear form
-          }, 2000);
-        } else {
-          alert('Registration successful! You can now log in.');
-          setAuthMode('login');
-        }
+          } else if (role === 'CUSTOMER') {
+            navigate(`/customer`);
+          } else {
+            alert('Unrecognized role. Please contact support.');
+          }
+        }, 2000);
       })
       .catch((err) => {
-        console.error(`${authMode} failed`, err);
-        alert(`Error: ${authMode === 'login' ? 'Invalid credentials' : 'Registration failed'}`);
+        console.error('Login failed', err);
+        alert('Error: Invalid credentials');
       })
       .finally(() => setLoading(false));
-  };
+  } else {
+    // Registration flow for customer
+    const register = {
+      userName: data.userName,
+      password: data.password,
+      customerName: data.customerName,
+      customerEmailId: data.customerEmailId,
+      le:{
+        cibil:{}
+      }
+    };
+
+    const registerData = new FormData();
+    registerData.append("cJson", JSON.stringify(register));
+    registerData.append("profileImage", new Blob([], { type: 'application/octet-stream' }), "empty.jpg");
+
+    axios.post('http://localhost:9090/customer/customer/savecustomer', registerData)
+      .then(() => {
+        alert('Registration successful! You can now log in.');
+        setAuthMode('login');
+        reset();
+      })
+      .catch((err) => {
+        console.error('Registration failed', err);
+        alert('Error: Registration failed');
+      })
+      .finally(() => setLoading(false));
+  }
+};
+
 
   return (
     <Modal
@@ -108,7 +134,7 @@ function LoginModal({ isOpen, onClose }) {
               label="Username"
               variant="outlined"
               margin="normal"
-              {...register('username', { required: true })}
+              {...register('userName', { required: true })}
             />
 
             {authMode === 'register' && (
@@ -118,7 +144,7 @@ function LoginModal({ isOpen, onClose }) {
                 type="email"
                 variant="outlined"
                 margin="normal"
-                {...register('email', { required: true })}
+                {...register('customerEmailId', { required: true })}
               />
             )}
 
@@ -144,7 +170,7 @@ function LoginModal({ isOpen, onClose }) {
                 label="Full Name"
                 variant="outlined"
                 margin="normal"
-                {...register('fullName', { required: true })}
+                {...register('customerName', { required: true })}
               />
             )}
 

@@ -12,6 +12,7 @@ import RegisterEnquiry from './pages/RegisterEnquiry';
 import './App.css'
 import BlogDetail from './pages/Blogdetail';
 import Dashboard from './modules/dashboard/Dashboard';
+import CustomerDashBoard from './modules/customerDashboard/CustomerDashboard';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="loanenquiryhome" element={<LoanEnquiryHome />} />
           <Route path="/blogs/:slug" element={<BlogDetail />} />
           <Route path="dashboard/*" element={<Dashboard />} />
+          <Route path="customer/*" element={<CustomerDashBoard />} />
         </Route>
 
         {/* Outside Layout */}

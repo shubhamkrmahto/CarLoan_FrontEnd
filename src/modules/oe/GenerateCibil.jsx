@@ -17,7 +17,7 @@ function GenerateCibil() {
 
   const getFTOEEnquiry = () => {
     setLoading(true);
-    axios.get('http://localhost:9090/crm/enquiry/getEnquiryForward_To_Oe')
+    axios.get('http://localhost:9090/crm/enquiry/getAllEnquiry')
       .then((res) => {
         setEnquiry(res.data);
         setLoading(false);
@@ -30,7 +30,7 @@ function GenerateCibil() {
 
   const updateCIBIL = (id) => {
     setLoading(true);
-    axios.get(`http://localhost:9090/oe/OE/updateCibil/${id}`)
+    axios.get(`http://localhost:9090/oe/oe/updateCibil/${id}`)
       .then(() => {
         setLoading(false);
         setShowPopup(true);
@@ -98,6 +98,7 @@ function GenerateCibil() {
                       size="small"
                       color="primary"
                       onClick={() => updateCIBIL(e.enquiryId)}
+                      disabled={e.cibil.cibilStatus !== 'PENDING'}
                     >
                       Generate CIBIL
                     </Button>

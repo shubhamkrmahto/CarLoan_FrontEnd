@@ -5,13 +5,16 @@ import {
   Container, TextField, MenuItem, Button, Box, Typography, Dialog, DialogTitle, DialogContent
 } from '@mui/material';
 import './LoanEnquiry.css';
+import { useParams } from 'react-router-dom';
 
 function LoanEnquiry() {
   const { register, handleSubmit, reset } = useForm();
   const [openPopup, setOpenPopup] = useState(false);
 
+  const {enquiryID} = useParams();
+
   const addData = (data) => {
-    const customer = {
+    const enquiry = {
       customerName: data.customerName,
       dateOfBirth: data.dateOfBirth,
       gender: data.gender,
@@ -26,7 +29,7 @@ function LoanEnquiry() {
     setOpenPopup(true);
 
     setTimeout(() => {
-      axios.post('http://localhost:9090/crm/enquiry/saveEnquiry', customer)
+      axios.patch(`http://localhost:9090/crm/enquiry/saveEnquiry/${enquiryID}`, enquiry)
         .then(() => {
           setOpenPopup(false);
           alert('Enquiry has been Registered...');

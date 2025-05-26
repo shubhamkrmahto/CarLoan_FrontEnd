@@ -48,7 +48,7 @@ function VerifyDocuments() {
 
   function approveApplication() {
   axios
-    .get(`http://localhost:9090/oe/OE/updateLoanApplicationDocumentsToVerified/${loanApplicationID}`)
+    .get(`http://localhost:9090/oe/oe/updateLoanApplicationDocumentsToVerified/${loanApplicationID}`)
     .then((res) => {
       if (typeof res.data !== 'string') {
         setApplication(res.data);
@@ -62,7 +62,7 @@ function VerifyDocuments() {
 
 function disapproveApplication() {
   axios
-    .get(`http://localhost:9090/oe/OE/updateLoanApplicationDocumentsToRejected/${loanApplicationID}`)
+    .get(`http://localhost:9090/oe/oe/updateLoanApplicationDocumentsToRejected/${loanApplicationID}`)
     .then((res) => {
       if (typeof res.data !== 'string') {
         setApplication(res.data);

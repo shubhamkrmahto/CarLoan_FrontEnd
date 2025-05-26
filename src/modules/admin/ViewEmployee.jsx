@@ -51,7 +51,7 @@ function ViewEmployee() {
 
   // Confirm deletion
     const handleConfirmDelete = () => {
-    axios.delete(`http://localhost:9090/admin/admin/employee/delete/${deleteId}`)
+    axios.delete(`http://localhost:9090/admin/admin/delete/${deleteId}`)
       .then(() => {
         setOpenConfirmDialog(false);
         setDeleteId(null);
@@ -89,6 +89,7 @@ function ViewEmployee() {
               <TableCell sx={{ color: 'white' }}>Employee ID</TableCell>
               <TableCell sx={{ color: 'white' }}>Employee Name</TableCell>
               <TableCell sx={{ color: 'white' }}>Employee Email</TableCell>
+              <TableCell sx={{ color: 'white' }}>Employee Password</TableCell>
               <TableCell sx={{ color: 'white' }}>Employee Contact</TableCell>
               <TableCell sx={{ color: 'white' }}>Employee Type</TableCell>
               <TableCell sx={{ color: 'white' }}>Profile Image</TableCell>
@@ -101,6 +102,7 @@ function ViewEmployee() {
                 <TableCell>{emp.employeeId}</TableCell>
                 <TableCell>{emp.employeeName}</TableCell>
                 <TableCell>{emp.employeeEmail}</TableCell>
+                <TableCell>{emp.password}</TableCell>
                 <TableCell>{emp.employeeContact}</TableCell>
                 <TableCell>{emp.employeeType}</TableCell>
                 <TableCell>
